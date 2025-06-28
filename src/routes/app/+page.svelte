@@ -1,4 +1,5 @@
 <script>
+	import PageTitle from '$lib/components/PageTitle.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import CardAction from '$lib/components/ui/card/card-action.svelte';
 	import CardContent from '$lib/components/ui/card/card-content.svelte';
@@ -9,69 +10,36 @@
 	import Card from '$lib/components/ui/card/card.svelte';
 
 	let { data } = $props();
-
-	let info = {
-		balance: 300,
-		change: 9.05,
-		coins: [
-			{
-				name: 'btc',
-				usd: 9,
-				change: 0.009999
-			},
-			{
-				name: 'eth',
-				usd: 980,
-				change: 0.9867
-			}
-		]
-	};
 </script>
 
+<!-- <h2 class="m-8 text-3xl font-bold">Popular</h2> -->
+<PageTitle>Popular</PageTitle>
 <main class="flex w-screen flex-col items-center p-2 px-4">
-	<Card class="mb-4 w-full">
-		<CardHeader>
-			<CardTitle class="text-lg">Balance:</CardTitle>
-			<CardDescription>
-				${info.balance.toLocaleString()} USD
-			</CardDescription>
-		</CardHeader>
-		<CardContent>
-			{#if info.change > 1}
-				<div class="balance w-fit rounded-sm bg-green-200 p-2">
-					%{info.change.toPrecision(2)}
-				</div>
-			{/if}
-		</CardContent>
-	</Card>
-
 	{#each data.coins as coin}
-		<Card class="my-2 w-full">
+		<Card class="my-2 w-full shadow-2xs">
 			<CardHeader>
-				<CardTitle>{coin.item.symbol}</CardTitle>
+				<CardTitle class="text-xl font-bold">
+					<a href="/app/{coin.item.id}">
+						{coin.item.name}
+					</a>
+				</CardTitle>
+				<CardDescription>{coin.item.symbol}</CardDescription>
 				<!-- this has to be a link or button-->
-				<CardDescription>
-					Rank: {coin.item.market_cap_rank}
-				</CardDescription>
-				<CardAction>
-					<img src={coin.item.small} alt="" class="rounded-full" />
-				</CardAction>
 			</CardHeader>
-			<CardContent>
-				{#if coin.item.data.price >= 1}
-					<div class="w-fit rounded-sm bg-green-200 p-2">
-						${coin.item.data.price.toLocaleString()} USD
+			<CardContent class="flex flex-row items-center justify-between gap-2">
+				<div class="flex w-1/2 justify-center rounded-sm bg-green-200 p-2">
+					${coin.item.data.price.toLocaleString()}
+				</div>
+				{#if coin.item.data.price_change_percentage_24h.usd < 0}
+					<div class="flex w-1/2 justify-center rounded-sm bg-red-200 p-2">
+						{coin.item.data.price_change_percentage_24h.usd.toFixed(2)}%
 					</div>
 				{:else}
-					<div class="w-fit p-2">
-						${coin.item.data.price.toLocaleString()} USD
+					<div class="flex w-1/2 justify-center rounded-sm bg-green-200 p-2">
+						{coin.item.data.price_change_percentage_24h.usd.toFixed(2)}%
 					</div>
 				{/if}
 			</CardContent>
-			<CardFooter class="gap-3">
-				<Button href="/app/{coin.item.id}">See Details</Button>
-				<Button>Track</Button>
-			</CardFooter>
 		</Card>
 	{/each}
 	<!-- 
