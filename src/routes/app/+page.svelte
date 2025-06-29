@@ -19,7 +19,7 @@
 		<Card class="my-2 w-full shadow-2xs">
 			<CardHeader>
 				<CardTitle class="text-xl font-bold">
-					<a href="/app/{coin.item.id}">
+					<a href="/app/coins/{coin.item.id}">
 						{coin.item.name}
 					</a>
 				</CardTitle>
