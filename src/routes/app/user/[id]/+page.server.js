@@ -37,8 +37,8 @@ export const load = async ({ params }) => {
 			let response = await fetch(`https://api.coingecko.com/api/v3/coins/${coin.coinId}`);
 			let coinData = await response.json();
 
-			console.log('coinData: ', coinData);
-			console.log('coin: ', coin);
+			// console.log('coinData: ', coinData);
+			// console.log('coin: ', coin);
 			coin.currentPrice = coinData.market_data?.current_price.usd;
 		}
 

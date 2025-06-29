@@ -8,7 +8,6 @@
 	import { SignOut } from '@auth/sveltekit/components';
 
 	let { data } = $props();
-	console.log('User data:', data);
 	let coins = $state([]);
 	coins = data.tracklist?.coins;
 
