@@ -10,7 +10,7 @@
 <main class="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
 	<!-- Navigation -->
 	<nav
-		class="container mx-auto flex flex-row items-center justify-between bg-neutral-300/50 px-6 py-8 backdrop-blur-xl"
+		class="container mx-auto flex w-full flex-row items-center justify-between bg-neutral-300/50 px-6 py-8 backdrop-blur-xl"
 	>
 		<h2 class="w-fit text-lg font-bold">Investo</h2>
 		<div class="buttons">
@@ -20,7 +20,7 @@
 					<a href="/app/user/{data.session.user?.id}">Dashboard</a>
 				</Button>
 			{:else}
-				<Button class="bg-neutral-200 text-gray-800">
+				<Button class="bg-neutral-200 text-gray-800 hover:bg-neutral-400">
 					<a href="/auth"> Log In </a>
 				</Button>
 			{/if}

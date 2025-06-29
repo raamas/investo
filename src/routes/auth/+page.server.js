@@ -10,9 +10,9 @@ export const load = async (event) => {
 		// Check if the user already exists in the database
 		const { data: existingUser, error: existingUserError } = await supabase
 			.from('users')
-			.select('*')
+			.select()
 			.eq('email', session.user.email)
-			.single();
+			.maybeSingle();
 
 		if (existingUserError) {
 			console.error('Error checking existing user:', existingUserError);

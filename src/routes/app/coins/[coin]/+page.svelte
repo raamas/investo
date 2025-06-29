@@ -19,6 +19,10 @@
 	let { data } = $props();
 	let isTracked = $state(data.isTracked);
 
+	if (!data.session?.user) {
+		isTracked = true;
+	}
+
 	const chartConfig = {
 		price: { label: 'Price', color: '#34d399' }
 	};

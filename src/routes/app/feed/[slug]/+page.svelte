@@ -41,7 +41,8 @@
 		<p class="flex items-center">
 			{likes} likes
 			<Button
-				class="text-md bg-transparent text-gray-600 shadow-none hover:bg-transparent hover:text-red-600 {likedClass}"
+				disabled={!data.session?.user.id}
+				class="text-md bg-transparent text-gray-600 shadow-none hover:bg-transparent hover:text-red-600 disabled:font-bold disabled:text-gray-800 {likedClass}"
 				onclick={() => sendLike()}
 			>
 				<Icon icon="fluent:heart-24-{heartState}" />
