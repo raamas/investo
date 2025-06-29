@@ -1,5 +1,4 @@
 import { supabase } from '$lib/supabaseClient';
-import { getPostBySlug } from '../mock';
 
 const sendLikes = async (post) => {
 	let { data, error } = await supabase
