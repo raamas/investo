@@ -15,7 +15,7 @@
 		<h2 class="w-fit text-lg font-bold">Investo</h2>
 		<div class="buttons">
 			<Button>Pricing</Button>
-			{#if data.session.user}
+			{#if data.session?.user}
 				<Button class="bg-neutral-200 text-gray-800">
 					<a href="/app/user/{data.session.user?.id}">Dashboard</a>
 				</Button>
