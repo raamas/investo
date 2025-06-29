@@ -25,7 +25,7 @@ export const load = async (event) => {
 
 		// User does not exist, create a new user record
 		// Note: Ensure that the 'users' table has the necessary columns: id, email, name, created_at
-
+		console.log('existingUser: ', existingUser);
 		let { data, error } = supabase
 			.from('users')
 			.insert({
