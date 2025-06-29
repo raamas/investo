@@ -2,9 +2,10 @@ import { supabase } from '$lib/supabaseClient';
 
 export const load = async ({ params }) => {
 	const { id } = params;
+	const { data: user, error } = await supabase.from('users').select().eq('id', id).maybeSingle();
+	let tracklist = [];
 
 	// Fetch user data from Supabase
-	const { data: user, error } = await supabase.from('users').select().eq('id', id).maybeSingle();
 
 	if (error) {
 		console.error('Error fetching user:', error);
@@ -26,22 +27,29 @@ export const load = async ({ params }) => {
 		return { user, status: 500, error: 'Failed to fetch user tracklists' };
 	}
 
-	let tracklist = userTracklist;
-	tracklist.coins.sort((a, b) => {
-		return b.startPrice - a.startPrice; // Sort by start price
-	});
+	if (userTracklist) {
+		tracklist = userTracklist;
+		tracklist?.coins?.sort((a, b) => {
+			return b.startPrice - a.startPrice; // Sort by start price
+		});
 
-	for (const coin of userTracklist?.coins) {
-		let response = await fetch(`https://api.coingecko.com/api/v3/coins/${coin.coinId}`);
-		let coinData = await response.json();
+		for (const coin of userTracklist?.coins) {
+			let response = await fetch(`https://api.coingecko.com/api/v3/coins/${coin.coinId}`);
+			let coinData = await response.json();
 
-		console.log('coinData: ', coinData);
-		console.log('coin: ', coin);
-		coin.currentPrice = coinData.market_data?.current_price.usd;
+			console.log('coinData: ', coinData);
+			console.log('coin: ', coin);
+			coin.currentPrice = coinData.market_data?.current_price.usd;
+		}
+
+		return {
+			// removeCoinFromTracklist,
+			user,
+			tracklist
+		};
 	}
 
 	return {
-		// removeCoinFromTracklist,
 		user,
 		tracklist
 	};

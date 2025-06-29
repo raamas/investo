@@ -42,9 +42,10 @@
 	{#if data?.session?.user?.id !== data?.user?.id}
 		<Button class="rounded-xl bg-emerald-600 p-6">Follow</Button>
 	{:else}
-		<Button class="rounded-xl bg-red-700 p-6 hover:bg-red-800">
-			<SignOut />
-		</Button>
+		<SignOut
+			signOutPage="signout"
+			class="text-primary-foreground inline-flex shrink-0 items-center justify-center gap-2 rounded-md rounded-xl bg-red-800 p-4 text-sm font-bold font-medium whitespace-nowrap shadow-xs transition-all outline-none hover:bg-red-950/90"
+		/>
 	{/if}
 	<h3 class="my-6 text-xl font-bold">Tracklist</h3>
 	<Card class="	 w-full shadow-2xs">

@@ -10,25 +10,25 @@
 <main class="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
 	<!-- Navigation -->
 	<nav
-		class="container mx-auto flex w-full flex-row items-center justify-between bg-neutral-300/50 px-6 py-8 backdrop-blur-xl"
+		class="fixed z-1 mb-20 flex w-full flex-row items-center justify-between rounded-b-2xl bg-transparent px-6 py-8 shadow-sm backdrop-blur-lg"
 	>
-		<h2 class="w-fit text-lg font-bold">Investo</h2>
+		<h2 class="w-fit text-3xl font-bold">Investo</h2>
 		<div class="buttons">
 			<Button>Pricing</Button>
-			{#if data.session?.user}
-				<Button class="bg-neutral-200 text-gray-800">
-					<a href="/app/user/{data.session.user?.id}">Dashboard</a>
-				</Button>
-			{:else}
+			{#if !data.session?.user?.id}
 				<Button class="bg-neutral-200 text-gray-800 hover:bg-neutral-400">
 					<a href="/auth"> Log In </a>
+				</Button>
+			{:else}
+				<Button class="bg-neutral-200 text-gray-800">
+					<a href="/app/user/{data.session.user?.id}">Dashboard</a>
 				</Button>
 			{/if}
 		</div>
 	</nav>
 
 	<!-- Hero Section -->
-	<section class="container mx-auto px-6 py-20 text-center">
+	<section class="container mx-auto px-6 py-20 pt-[30vh] text-center">
 		<div class="mx-auto max-w-4xl">
 			<h1
 				class="mb-6 bg-gradient-to-r from-white to-purple-300 bg-clip-text text-6xl font-bold text-transparent"

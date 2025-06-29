@@ -6,7 +6,6 @@ export const load = async (event) => {
 	const session = await event.locals.auth();
 
 	if (session?.user) {
-		// throw redirect(303, '/app');
 		// Check if the user already exists in the database
 		const { data: existingUser, error: existingUserError } = await supabase
 			.from('users')
@@ -21,7 +20,7 @@ export const load = async (event) => {
 
 		if (existingUser) {
 			// User already exists, redirect to their profile
-			return redirect(303, `/user/${existingUser.id}`);
+			return redirect(303, `/app/user/${existingUser.id}`);
 		}
 
 		// User does not exist, create a new user record
@@ -44,7 +43,7 @@ export const load = async (event) => {
 		}
 
 		if (data) {
-			return redirect(303, `/user/${data.id}`);
+			return redirect(303, `/app/user/${data.id}`);
 		} else {
 			return redirect(303, '/');
 		}

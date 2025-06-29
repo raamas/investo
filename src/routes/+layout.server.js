@@ -4,13 +4,17 @@ import { supabase } from '$lib/supabaseClient.js';
 
 export const load = async (event) => {
 	const session = await event.locals.auth();
+	console.log(session);
+	if (!session) {
+		// return redirect(303, '/');
+	}
 	if (session?.user) {
 		// Check if the user already exists in the database
 		const { data: existingUser, error: existingUserError } = await supabase
 			.from('users')
 			.select('*')
 			.eq('email', session.user.email)
-			.single();
+			.maybeSingle();
 
 		if (existingUserError) {
 			console.error('Error checking existing user:', existingUserError);
@@ -20,7 +24,7 @@ export const load = async (event) => {
 
 		if (existingUser) {
 			// User already exists, redirect to their profile
-			// redirect(303, `/user/${existingUser.id}`);
+			// redirect(303, `/app/user/${existingUser.id}`);
 			session.user.id = existingUser.id; // Ensure the session has the user ID
 			return {
 				session
@@ -45,9 +49,11 @@ export const load = async (event) => {
 		}
 
 		if (data) {
-			return event.redirect(303, `/user/${data.id}`);
+			console.log('Habemus Datam: ', data);
+			return redirect(303, `/app/user/${data.id}`);
 		} else {
-			return event.redirect(303, '/landing');
+			console.log('Nein Datam: ', data);
+			return redirect(303, '/');
 		}
 	}
 

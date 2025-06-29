@@ -14,9 +14,15 @@
 				<a href="/app/feed"> <Icon icon="fluent:news-24-filled" style="font-size: 24px;" /> </a>
 			</li>
 			<li>
-				<a href="/app/user/{user.id}">
-					<Icon icon="fluent:person-24-filled" style="font-size: 24px;" />
-				</a>
+				{#if user?.id}
+					<a href="/app/user/{user.id}">
+						<Icon icon="fluent:person-24-filled" style="font-size: 24px;" />
+					</a>
+				{:else}
+					<a href="/auth">
+						<Icon icon="fluent:person-24-filled" style="font-size: 24px;" />
+					</a>
+				{/if}
 			</li>
 		</ul>
 	</nav>

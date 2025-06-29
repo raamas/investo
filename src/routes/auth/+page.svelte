@@ -13,19 +13,5 @@
 			class="rounded-2xl bg-emerald-600 p-6 text-lg shadow-none hover:bg-emerald-800 active:bg-emerald-900"
 			><SignIn provider="google" signInPage="signin" /></Button
 		>
-		<Button
-			variant="ghost"
-			class="rounded rounded-2xl bg-emerald-600 p-6 text-lg shadow-none hover:bg-emerald-800 active:bg-emerald-900"
-		>
-			SignIn with Google
-			<!-- <SignIn provider="google" signInPage="signin" /> -->
-		</Button>
-		<Button
-			variant="ghost"
-			class="rounded rounded-2xl bg-emerald-600 p-6 text-lg shadow-none hover:bg-emerald-800 active:bg-emerald-900"
-		>
-			SignIn with Google
-			<!-- <SignIn provider="google" signInPage="signin" /> -->
-		</Button>
 	</div>
 </main>
