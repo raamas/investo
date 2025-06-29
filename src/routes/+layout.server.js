@@ -47,7 +47,7 @@ export const load = async (event) => {
 		if (data) {
 			return event.redirect(303, `/user/${data.id}`);
 		} else {
-			return event.redirect(303, '/');
+			return event.redirect(303, '/landing');
 		}
 	}
 
