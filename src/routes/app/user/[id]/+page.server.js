@@ -4,7 +4,7 @@ export const load = async ({ params }) => {
 	const { id } = params;
 
 	// Fetch user data from Supabase
-	const { data: user, error } = await supabase.from('users').select('*').eq('id', id).single();
+	const { data: user, error } = await supabase.from('users').select().eq('id', id).maybeSingle();
 
 	if (error) {
 		console.error('Error fetching user:', error);
@@ -19,7 +19,7 @@ export const load = async ({ params }) => {
 		.from('tracklists')
 		.select('*')
 		.eq('userId', id)
-		.single();
+		.maybeSingle();
 
 	if (tracklistError) {
 		console.error('Error fetching user tracklists:', tracklistError);

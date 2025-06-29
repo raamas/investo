@@ -36,7 +36,7 @@
 	<div class="text-md mt-4 flex w-full items-center justify-between text-gray-600 italic">
 		<p>
 			By
-			<a href="/user/{post.authorId}" class="hover:text-emerald-400"> {post.authorName}</a>
+			<a href="/app/user/{post.authorId}" class="hover:text-emerald-400"> {post.authorName}</a>
 		</p>
 		<p class="flex items-center">
 			{likes} likes
