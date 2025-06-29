@@ -5,11 +5,33 @@
 	import { supabase } from '$lib/supabaseClient.js';
 	import Icon from '@iconify/svelte';
 	import '../../../app.css';
+	import { SignOut } from '@auth/sveltekit/components';
 
 	let { data } = $props();
 	console.log('User data:', data);
 	let coins = $state([]);
 	coins = data.tracklist?.coins;
+
+	const removeCoinFromTracklist = async (coinId, userId) => {
+		// Implement the logic to remove the coin from the tracklist
+		let newUserCoins = coins.filter((coin) => coin.coinId !== coinId);
+
+		// You might want to update the database or state here
+		let { data: newTracklist, error } = await supabase
+			.from('tracklists')
+			.update({ coins: newUserCoins })
+			.eq('userId', userId)
+			.select()
+			.single();
+
+		if (error) {
+			console.error('Error removing coin from tracklist:', error);
+			console.log(coins);
+			return;
+		}
+
+		coins = newTracklist.coins;
+	};
 </script>
 
 <main class="flex min-h-[95vh] flex-col p-8">
@@ -20,7 +42,9 @@
 	{#if data?.session?.user?.id !== data?.user?.id}
 		<Button class="rounded-xl bg-emerald-600 p-6">Follow</Button>
 	{:else}
-		<Button disabled class="rounded-xl bg-gray-600 p-6">Follow</Button>
+		<Button class="rounded-xl bg-red-700 p-6 hover:bg-red-800">
+			<SignOut />
+		</Button>
 	{/if}
 	<h3 class="my-6 text-xl font-bold">Tracklist</h3>
 	<Card class="	 w-full shadow-2xs">
@@ -54,16 +78,18 @@
 								</div>
 							{/if}
 
-							<Button
-								class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
-								onclick={() => {
-									// Handle remove coin from tracklist
-									console.log(`Remove ${coin?.coinId} from tracklist`);
-									data.removeCoinFromTracklist(coin?.coinId, data.session?.user?.id);
-								}}
-							>
-								<Icon icon="fluent:delete-24-filled" />
-							</Button>
+							{#if data.session}
+								<Button
+									class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
+									onclick={() => {
+										// Handle remove coin from tracklist
+										console.log(`Remove ${coin?.coinId} from tracklist`);
+										removeCoinFromTracklist(coin?.coinId, data.session?.user?.id);
+									}}
+								>
+									<Icon icon="fluent:delete-24-filled" />
+								</Button>
+							{/if}
 						{/if}
 					</div>
 				{/each}

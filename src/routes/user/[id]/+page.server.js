@@ -1,24 +1,4 @@
 import { supabase } from '$lib/supabaseClient';
-const removeCoinFromTracklist = async (coinId, userId) => {
-	// Implement the logic to remove the coin from the tracklist
-	let newUserCoins = coins.filter((coin) => coin.coinId !== coinId);
-
-	// You might want to update the database or state here
-	let { data: newTracklist, error } = await supabase
-		.from('tracklists')
-		.update({ coins: newUserCoins })
-		.eq('userId', userId)
-		.select()
-		.single();
-
-	if (error) {
-		console.error('Error removing coin from tracklist:', error);
-		console.log(coins);
-		return;
-	}
-
-	coins = newTracklist.coins;
-};
 
 export const load = async ({ params }) => {
 	const { id } = params;
@@ -61,7 +41,7 @@ export const load = async ({ params }) => {
 	}
 
 	return {
-		removeCoinFromTracklist,
+		// removeCoinFromTracklist,
 		user,
 		tracklist
 	};
