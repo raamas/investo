@@ -46,7 +46,7 @@
 			console.log(coin);
 
 			if (coin.coinId === coinId) {
-				// return true;
+				return true;
 			}
 		}
 
@@ -59,6 +59,7 @@
 	const addToTrackList = async () => {
 		if (await checkTracked(data.id, data.session?.user?.id)) {
 			isTracked = true;
+			console.log(data.id, ' is already being tracked');
 			return;
 		}
 
@@ -68,11 +69,33 @@
 			.from('tracklists')
 			.select()
 			.eq('userId', data?.session?.user?.id)
-			.single();
+			.maybeSingle();
 
 		if (userTracklistError) {
 			console.log('error jaja', userTracklistError);
 			return;
+		}
+
+		if (!userTracklist) {
+			let { data: newTracklist, error } = await supabase
+				.from('tracklists')
+				.insert({
+					id: v4(),
+					userId: data?.session?.user?.id,
+					coins: [
+						{
+							coinId: data.id,
+							startPrice: data.market_data.current_price.usd,
+							name: data.name,
+							currentPrice: null
+						}
+					]
+				})
+				.select()
+				.single();
+
+			if (error) console.log('error creating a new tracklist(coins/coin)', error);
+			if (newTracklist) console.log('new tracklist', newTracklist);
 		}
 
 		let userCoins = userTracklist.coins;
