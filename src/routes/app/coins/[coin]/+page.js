@@ -1,5 +1,3 @@
-import { supabase } from '$lib/supabaseClient.js';
-
 export const load = async ({ fetch, params }) => {
 	let response = await fetch(`https://api.coingecko.com/api/v3/coins/${params.coin}`, {
 		headers: {
@@ -13,10 +11,8 @@ export const load = async ({ fetch, params }) => {
 
 	let url = `https://api.coingecko.com/api/v3/coins/${params.coin}/market_chart/range?vs_currency=usd&from=${lastYear}&to=${currentDate}`;
 	let chartResponse = await fetch(url);
-	console.log(url);
 
 	let chart = await chartResponse.json();
-	console.log(chart.prices.length);
 
 	let prices = [];
 
@@ -28,13 +24,13 @@ export const load = async ({ fetch, params }) => {
 			month: new Date(month.getFullYear(), month.getMonth(), 1),
 			price: chart.prices[i * 30][1]
 		};
-		console.log(element);
+
 		prices.push(element);
 	}
 
 	prices = prices.reverse();
 	data.chart = prices;
-	console.log(params);
+
 	// data.isTracked = checkTracked(params.coin, params.data);
 	data.isTracked = true;
 	return { ...data };

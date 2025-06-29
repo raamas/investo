@@ -5,10 +5,7 @@ import { supabase } from '$lib/supabaseClient.js';
 export const load = async (event) => {
 	const session = await event.locals.auth();
 	const url = event.url;
-	// console.log(session);
-	if (!session) {
-		// return redirect(303, '/');
-	}
+
 	if (session && session.user) {
 		// Check if the user already exists in the database
 		const { data: existingUser, error: existingUserError } = await supabase
@@ -22,8 +19,6 @@ export const load = async (event) => {
 			return { session };
 			// return { status: 500, error: 'Failed to check existing user' };
 		}
-
-		console.log(existingUser);
 		if (existingUser) {
 			// User already exists, redirect to their profile
 			// redirect(303, `/app/user/${existingUser.id}`);
@@ -37,32 +32,6 @@ export const load = async (event) => {
 			console.log(url.pathname, 'to /auth');
 			return redirect(303, `/auth`);
 		}
-
-		// User does not exist, create a new user record
-		// const { data, error } = await supabase
-		// 	.from('users')
-		// 	.insert({
-		// 		id: uuidv4(),
-		// 		email: session.user.email,
-		// 		name: session.user.name || session.user.email.split('@')[0],
-		// 		password: uuidv4(),
-		// 		created_at: new Date().toISOString()
-		// 	})
-		// 	.select()
-		// 	.single();
-
-		// if (error) {
-		// 	console.error('Error creating user:', error);
-		// 	return { status: 500, error: 'Failed to create user in user/layout.server.js' };
-		// }
-
-		// if (data) {
-		// 	// console.log('Habemus Datam: ', data);
-		// return redirect(303, `/app/user/${data.id}`);
-		// } else {
-		// 	// console.log('Nein Datam: ', data);
-		// 	return redirect(303, '/');
-		// }
 	}
 
 	return {

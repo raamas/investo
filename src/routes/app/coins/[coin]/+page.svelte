@@ -40,11 +40,7 @@
 			return;
 		}
 
-		console.log(userCoins);
-
 		for (const coin of userCoins.coins) {
-			console.log(coin);
-
 			if (coin.coinId === coinId) {
 				return true;
 			}
@@ -63,8 +59,6 @@
 			return;
 		}
 
-		console.log('Adding to track list:', data.id, data.session?.user?.id);
-
 		let { data: userTracklist, error: userTracklistError } = await supabase
 			.from('tracklists')
 			.select()
@@ -72,7 +66,7 @@
 			.maybeSingle();
 
 		if (userTracklistError) {
-			console.log('error jaja', userTracklistError);
+			console.log('error de userTracklist en coins/coin ', userTracklistError);
 			return;
 		}
 
@@ -99,7 +93,6 @@
 		}
 
 		let userCoins = userTracklist.coins;
-		console.log(userCoins);
 
 		const { error, data: newTracklist } = await supabase
 			.from('tracklists')
@@ -129,8 +122,6 @@
 			isTracked = true;
 		}
 	};
-
-	// await checkTracked(data.id, data.session?.user?.id);
 </script>
 
 <header class="flex w-screen flex-row items-center justify-between">
