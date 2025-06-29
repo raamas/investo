@@ -17,9 +17,13 @@
 		<div class="buttons">
 			<Button>Pricing</Button>
 			{#if data.session.user}
-				<Button class="bg-neutral-200 text-gray-800">Dashboard</Button>
+				<Button class="bg-neutral-200 text-gray-800">
+					<a href="/app/user/{data.session.user?.id}">Dashboard</a>
+				</Button>
 			{:else}
-				<Button class="bg-neutral-200 text-gray-800">Log In</Button>
+				<Button class="bg-neutral-200 text-gray-800">
+					<a href="/auth"> Log In </a>
+				</Button>
 			{/if}
 		</div>
 	</nav>

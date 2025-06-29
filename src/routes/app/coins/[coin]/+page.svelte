@@ -14,34 +14,66 @@
 	import { cubicInOut } from 'svelte/easing';
 	import { supabase } from '$lib/supabaseClient.js';
 	import { v4 } from 'uuid';
+	import { onMount } from 'svelte';
 
 	let { data } = $props();
-	let isTracked = $state(false);
+	let isTracked = $state(data.isTracked);
 
 	const chartConfig = {
 		price: { label: 'Price', color: '#34d399' }
 	};
 
-	const getUserCoins = async () => {
-		const { data: userCoins, error: coinsError } = await supabase
+	const checkTracked = async (coinId, userId) => {
+		let { data: userCoins, error } = await supabase
 			.from('tracklists')
-			.select('coins')
-			.eq('userId', data.session?.user?.id)
+			.select()
+			.eq('userId', userId)
 			.single();
 
+		if (error) {
+			console.log('error loading user tracklist for tracking check (route: /coins/[coin])');
+			console.log(error);
+			return;
+		}
+
+		console.log(userCoins);
+
 		for (const coin of userCoins.coins) {
-			if (coin === data.id) {
-				isTracked = true;
-				break;
+			console.log(coin);
+
+			if (coin.coinId === coinId) {
+				// return true;
 			}
 		}
-		console.log('User coins:', userCoins);
-		return userCoins?.coins || [];
+
+		return false;
 	};
+	onMount(async () => {
+		isTracked = await checkTracked(data.id, data.session?.user?.id);
+	});
 
 	const addToTrackList = async () => {
+		if (await checkTracked(data.id, data.session?.user?.id)) {
+			isTracked = true;
+			return;
+		}
+
 		console.log('Adding to track list:', data.id, data.session?.user?.id);
-		let userCoins = await getUserCoins();
+
+		let { data: userTracklist, error: userTracklistError } = await supabase
+			.from('tracklists')
+			.select()
+			.eq('userId', data?.session?.user?.id)
+			.single();
+
+		if (userTracklistError) {
+			console.log('error jaja', userTracklistError);
+			return;
+		}
+
+		let userCoins = userTracklist.coins;
+		console.log(userCoins);
+
 		const { error, data: newTracklist } = await supabase
 			.from('tracklists')
 			.update({
@@ -64,11 +96,14 @@
 			console.error('Error adding to track list:', error);
 		} else {
 			console.log('Added to track list:', newTracklist);
-			getUserCoins();
+			checkTracked(data.id, data.session?.user?.id);
+		}
+		if (!isTracked) {
+			isTracked = true;
 		}
 	};
 
-	getUserCoins();
+	// await checkTracked(data.id, data.session?.user?.id);
 </script>
 
 <header class="flex w-screen flex-row items-center justify-between">

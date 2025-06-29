@@ -17,7 +17,7 @@
 			<CardHeader>
 				<img src={post.image} alt={post.title} class="mb-2 h-48 w-full rounded-lg object-cover" />
 				<CardTitle>
-					<a href="/feed/{post.slug}/"> {post.title}</a>
+					<a href="/app/feed/{post.slug}/"> {post.title}</a>
 				</CardTitle>
 			</CardHeader>
 			<CardContent>

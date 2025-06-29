@@ -4,7 +4,7 @@
 	import Card from '$lib/components/ui/card/card.svelte';
 	import { supabase } from '$lib/supabaseClient.js';
 	import Icon from '@iconify/svelte';
-	import '../../../app.css';
+	import '../../../../app.css';
 	import { SignOut } from '@auth/sveltekit/components';
 
 	let { data } = $props();

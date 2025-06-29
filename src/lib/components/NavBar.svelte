@@ -11,10 +11,10 @@
 		<ul class="flex flex-row gap-20">
 			<li><a href="/app"><Icon icon="fluent:home-24-filled" style="font-size: 24px;" /></a></li>
 			<li>
-				<a href="/feed"> <Icon icon="fluent:news-24-filled" style="font-size: 24px;" /> </a>
+				<a href="/app/feed"> <Icon icon="fluent:news-24-filled" style="font-size: 24px;" /> </a>
 			</li>
 			<li>
-				<a href="/user/{user.id}">
+				<a href="/app/user/{user.id}">
 					<Icon icon="fluent:person-24-filled" style="font-size: 24px;" />
 				</a>
 			</li>
