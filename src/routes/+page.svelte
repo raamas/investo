@@ -6,20 +6,22 @@
 	let { data } = $props();
 </script>
 
-<main class="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
+<main
+	class="min-h-screen snap-y snap-mandatory scroll-smooth bg-gradient-to-br from-blue-900 via-emerald-900 to-green-900"
+>
 	<!-- Navigation -->
 	<nav
-		class="fixed z-1 mb-20 flex w-full flex-row items-center justify-between rounded-b-2xl bg-transparent px-6 py-8 shadow-sm backdrop-blur-lg"
+		class="fixed z-1 mb-20 flex w-full flex-row items-center justify-between rounded-b-2xl bg-transparent px-6 py-8 shadow-sm/10 shadow-neutral-800 backdrop-blur-lg"
 	>
-		<h2 class="w-fit text-3xl font-bold">Investo</h2>
+		<h2 class="w-fit text-3xl font-bold text-neutral-950/80">Investo</h2>
 		<div class="buttons">
-			<Button>Pricing</Button>
+			<Button class="shadow-sm shadow-black/30 hover:bg-emerald-800">Pricing</Button>
 			{#if !data.session?.user?.id}
-				<Button class="bg-neutral-200 text-gray-800 hover:bg-neutral-400">
+				<Button class="bg-neutral-200 text-gray-800 hover:bg-neutral-300">
 					<a href="/auth"> Log In </a>
 				</Button>
 			{:else}
-				<Button class="bg-neutral-200 text-gray-800">
+				<Button class="bg-neutral-200 text-gray-800 hover:bg-neutral-200 hover:text-emerald-600">
 					<a href="/app/user/{data.session.user?.id}">Dashboard</a>
 				</Button>
 			{/if}
@@ -27,7 +29,7 @@
 	</nav>
 
 	<!-- Hero Section -->
-	<section class="container mx-auto px-6 py-20 pt-[30vh] text-center">
+	<section class="container mx-auto snap-center snap-always px-6 py-20 pt-[30vh] text-center">
 		<div class="mx-auto max-w-4xl">
 			<h1
 				class="mb-6 bg-gradient-to-r from-white to-purple-300 bg-clip-text text-6xl font-bold text-transparent"
@@ -48,19 +50,23 @@
 				</button>
 			{:else}
 				<button
-					class="transform rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 text-lg font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:from-purple-700 hover:to-pink-700 hover:shadow-xl"
+					class="transform rounded-lg bg-gradient-to-r from-green-600 to-emerald-600 px-8 py-4 text-lg font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-700 hover:to-emerald-700 hover:shadow-xl"
 				>
-					{isLoggedIn ? 'Go to Dashboard' : 'Get Started'}
+					{#if isLoggedIn}
+						<a href="/app">Go to Dashboard</a>
+					{:else}
+						<a href="/auth">Get Started!</a>
+					{/if}
 				</button>
 			{/if}
 		</div>
 	</section>
 
 	<!-- Features Section -->
-	<section class="container mx-auto px-6 py-20">
+	<section class="container mx-auto snap-y snap-mandatory px-6 py-20">
 		<div class="grid gap-8 md:grid-cols-3">
 			<div
-				class="rounded-xl bg-white/10 p-8 backdrop-blur-sm transition-all duration-300 hover:bg-white/20"
+				class="rounded-xl bg-white/10 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-white/20"
 			>
 				<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-purple-500">
 					<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,7 +86,7 @@
 			</div>
 
 			<div
-				class="rounded-xl bg-white/10 p-8 backdrop-blur-sm transition-all duration-300 hover:bg-white/20"
+				class="rounded-xl bg-white/10 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-white/20"
 			>
 				<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500">
 					<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,7 +105,7 @@
 			</div>
 
 			<div
-				class="rounded-xl bg-white/10 p-8 backdrop-blur-sm transition-all duration-300 hover:bg-white/20"
+				class="snap-center snap-always rounded-xl bg-white/10 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-white/20"
 			>
 				<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-green-500">
 					<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,7 +126,7 @@
 	</section>
 
 	<!-- CTA Section -->
-	<section class="container mx-auto px-6 py-20 text-center">
+	<section class="container flex w-full px-6 py-20 text-center">
 		<div class="mx-auto max-w-2xl rounded-2xl bg-white/10 p-12 backdrop-blur-sm">
 			<h2 class="mb-4 text-3xl font-bold">Ready to Get Started?</h2>
 			<p class="mb-8 text-gray-300">
@@ -136,9 +142,14 @@
 				</button>
 			{:else}
 				<button
-					class="transform rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 text-lg font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:from-purple-700 hover:to-pink-700 hover:shadow-xl"
+					class="transform rounded-lg bg-gradient-to-r from-green-600 to-emerald-600 px-8 py-4 text-lg font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-700 hover:to-emerald-700 hover:shadow-xl"
 				>
-					{isLoggedIn ? 'Go to Dashboard' : 'Start Free Trial'}
+					<!-- {isLoggedIn ? 'Go to Dashboard' : 'Start Free Trial'} -->
+					{#if isLoggedIn}
+						<a href="/app">Go to Dashboard</a>
+					{:else}
+						<a href="/auth">Start Now!</a>
+					{/if}
 				</button>
 			{/if}
 		</div>

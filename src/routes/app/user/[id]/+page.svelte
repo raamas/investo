@@ -33,7 +33,7 @@
 	};
 </script>
 
-<main class="flex min-h-[95vh] flex-col p-8">
+<main class="flex min-h-[95vh] flex-col p-8 md:mx-auto md:mt-10 md:w-1/2">
 	<div class=" mt-6 mb-8 flex flex-row items-center justify-between gap-4">
 		<h2 class="text-start text-2xl font-bold">{data?.user?.name}</h2>
 		<p>10K Followers</p>
@@ -46,7 +46,7 @@
 			class="text-primary-foreground inline-flex shrink-0 items-center justify-center gap-2 rounded-md rounded-xl bg-red-800 p-4 text-sm font-bold font-medium whitespace-nowrap shadow-xs transition-all outline-none hover:bg-red-950/90"
 		/>
 	{/if}
-	<h3 class="my-6 text-xl font-bold">Tracklist</h3>
+	<h3 class="my-6 text-xl font-bold md:mt-12">Tracklist</h3>
 	<Card class="	 w-full shadow-2xs">
 		<CardContent>
 			<div class="flex flex-col gap-4">

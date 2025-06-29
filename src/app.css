@@ -116,6 +116,9 @@
   * {
     @apply border-border outline-ring/50;
   }
+  a{
+    @apply hover:text-emerald-700
+  }
   body {
     @apply bg-background text-foreground;
     @apply bg-gray-100

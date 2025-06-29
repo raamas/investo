@@ -2,8 +2,6 @@ import { supabase } from '$lib/supabaseClient';
 import { getPostBySlug } from '../mock';
 
 const sendLikes = async (post) => {
-	console.log('post', post);
-	console.log('sending likes to post ', post.postId);
 	let { data, error } = await supabase
 		.from('posts')
 		.update({ likes: post.likes + 1 })
@@ -16,13 +14,10 @@ const sendLikes = async (post) => {
 		return;
 	}
 
-	console.log(data.likes);
 	return data.likes;
 };
 
 const removeLikes = async (post) => {
-	console.log('post', post);
-	console.log('sending likes to post ', post.postId);
 	let { data, error } = await supabase
 		.from('posts')
 		.update({ likes: post.likes - 1 })
@@ -35,7 +30,6 @@ const removeLikes = async (post) => {
 		return;
 	}
 
-	console.log(data);
 	return data.likes;
 };
 
@@ -43,7 +37,6 @@ export const load = async ({ params }) => {
 	let { slug } = params;
 	let { data: post, error } = await supabase.from('posts').select().eq('slug', slug).single();
 
-	console.log(post);
 	// let data = po.json()
 	return {
 		post,

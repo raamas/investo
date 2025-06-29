@@ -12,8 +12,6 @@
 	let likedClass = $derived(liked ? 'text-red-600' : '');
 	let heartState = $derived(liked ? 'filled' : 'regular');
 
-	console.log(post);
-
 	const sendLike = async () => {
 		if (liked) {
 			likes = await data.removeLikes({ postId: post.postId, likes: likes });
@@ -22,18 +20,16 @@
 			likes = await data.sendLikes({ postId: post.postId, likes: likes });
 			liked = true;
 		}
-
-		console.log(data);
 	};
 </script>
 
-<PageTitle>{post.title}</PageTitle>
+<PageTitle className="md:mt-24">{post.title}</PageTitle>
 <div class="flex flex-col items-center justify-center p-8 pb-2">
 	<div class="mb-4 w-full max-w-2xl">
-		<img src={post.coverImage} alt={post.title} class="mb-2 h-64 w-full rounded-lg object-cover" />
+		<img src={post.image} alt={post.title} class="mb-2 h-64 w-full rounded-lg object-cover" />
 	</div>
 	<p class="text-sm text-gray-600">{post.excerpt}</p>
-	<div class="text-md mt-4 flex w-full items-center justify-between text-gray-600 italic">
+	<div class="text-md mt-4 flex w-full items-center justify-between text-gray-600 italic md:w-1/2">
 		<p>
 			By
 			<a href="/app/user/{post.authorId}" class="hover:text-emerald-400"> {post.authorName}</a>

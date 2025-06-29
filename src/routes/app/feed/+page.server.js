@@ -10,7 +10,7 @@ export const load = async () => {
 	posts.sort((a, b) => {
 		return b.likes - a.likes;
 	});
-	console.log('posts: ', posts);
+
 	return {
 		posts
 	};

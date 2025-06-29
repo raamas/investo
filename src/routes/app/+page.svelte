@@ -13,10 +13,12 @@
 </script>
 
 <!-- <h2 class="m-8 text-3xl font-bold">Popular</h2> -->
-<PageTitle>Popular</PageTitle>
-<main class="flex w-screen flex-col items-center p-2 px-4">
+<PageTitle className="md:mt-24">Popular</PageTitle>
+<main
+	class="flex w-screen flex-col items-center p-2 px-4 md:flex-row md:flex-wrap md:justify-center md:gap-3"
+>
 	{#each data.coins as coin}
-		<Card class="my-2 w-full shadow-2xs">
+		<Card class="my-2 w-full shadow-2xs md:my-1 md:w-1/4">
 			<CardHeader>
 				<CardTitle class="text-xl font-bold">
 					<a href="/app/coins/{coin.item.id}">
@@ -49,4 +51,4 @@
     NAVBAR
     -->
 </main>
- d
+d

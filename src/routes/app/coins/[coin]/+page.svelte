@@ -124,13 +124,13 @@
 	};
 </script>
 
-<header class="flex w-screen flex-row items-center justify-between">
+<header class="flex w-screen flex-row items-center justify-between md:mx-auto md:mt-16 md:w-1/2">
 	<PageTitle>{data.name}</PageTitle>
 	<div class="m-8 text-lg font-light text-gray-700">
 		${data.market_data.current_price.usd.toLocaleString()} USD
 	</div>
 </header>
-<div class="flex flex-col justify-center p-4 text-center">
+<div class="flex flex-col justify-center p-4 text-center md:mx-auto md:w-1/3 md:justify-center">
 	<Button
 		disabled={isTracked}
 		class="text-primary-foreground text-md rounded-2xl bg-emerald-400 p-6 shadow-xs hover:bg-emerald-600/90 disabled:bg-gray-300 disabled:text-gray-500"
