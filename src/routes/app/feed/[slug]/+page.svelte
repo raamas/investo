@@ -23,8 +23,8 @@
 	};
 </script>
 
-<PageTitle className="md:mt-24">{post.title}</PageTitle>
-<div class="flex flex-col items-center justify-center p-8 pb-2">
+<div class="flex flex-col items-center justify-center p-8 pb-2 text-center">
+	<PageTitle className="md:mt-16">{post.title}</PageTitle>
 	<div class="mb-4 w-full max-w-2xl">
 		<img src={post.image} alt={post.title} class="mb-2 h-64 w-full rounded-lg object-cover" />
 	</div>

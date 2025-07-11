@@ -1,4 +1,5 @@
 <script>
+	import Coin from '$lib/components/Coin.svelte';
 	import PageTitle from '$lib/components/PageTitle.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import CardAction from '$lib/components/ui/card/card-action.svelte';
@@ -12,43 +13,11 @@
 	let { data } = $props();
 </script>
 
-<!-- <h2 class="m-8 text-3xl font-bold">Popular</h2> -->
-<PageTitle className="md:mt-24">Popular</PageTitle>
 <main
-	class="flex w-screen flex-col items-center p-2 px-4 md:flex-row md:flex-wrap md:justify-center md:gap-3"
+	class="flex w-screen flex-col items-center text-center md:flex-row md:flex-wrap md:justify-center md:gap-3"
 >
-	{#each data.coins as coin}
-		<Card class="my-2 w-full shadow-2xs md:my-1 md:w-1/4">
-			<CardHeader>
-				<CardTitle class="text-xl font-bold">
-					<a href="/app/coins/{coin.item.id}">
-						{coin.item.name}
-					</a>
-				</CardTitle>
-				<CardDescription>{coin.item.symbol}</CardDescription>
-				<!-- this has to be a link or button-->
-			</CardHeader>
-			<CardContent class="flex flex-row items-center justify-between gap-2">
-				<div class="flex w-1/2 justify-center rounded-sm bg-green-200 p-2">
-					${coin.item.data.price.toLocaleString()}
-				</div>
-				{#if coin.item.data.price_change_percentage_24h.usd < 0}
-					<div class="flex w-1/2 justify-center rounded-sm bg-red-200 p-2">
-						{coin.item.data.price_change_percentage_24h.usd.toFixed(2)}%
-					</div>
-				{:else}
-					<div class="flex w-1/2 justify-center rounded-sm bg-green-200 p-2">
-						{coin.item.data.price_change_percentage_24h.usd.toFixed(2)}%
-					</div>
-				{/if}
-			</CardContent>
-		</Card>
-	{/each}
-	<!-- 
-    BALANCE
-    FOR COIN IN COINS:
-        COIN CARD
-    NAVBAR
-    -->
+	<PageTitle className="md:mt-24 ">Popular</PageTitle>
+	<div class="flex w-[80vw] flex-col flex-wrap items-end justify-center md:flex-row md:gap-3">
+		{#each data.coins as coin}<Coin {coin} />{/each}
+	</div>
 </main>
-d

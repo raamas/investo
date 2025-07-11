@@ -1,4 +1,7 @@
 <script>
+	// @ts-nocheck
+
+	import NavBar from '$lib/components/NavBar.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	let isLoggedIn;
 	let isLoading;
@@ -6,37 +9,59 @@
 	let { data } = $props();
 </script>
 
-<main
-	class="min-h-screen snap-y snap-mandatory scroll-smooth bg-gradient-to-br from-blue-900 via-emerald-900 to-green-900"
->
+<main class="min-h-screen snap-y snap-mandatory scroll-smooth bg-white text-black">
 	<!-- Navigation -->
-	<nav
-		class="fixed z-1 mb-20 flex w-full flex-row items-center justify-between rounded-b-2xl bg-transparent px-6 py-8 shadow-sm/10 shadow-neutral-800 backdrop-blur-lg"
-	>
-		<h2 class="w-fit text-3xl font-bold text-neutral-950/80">Investo</h2>
+	<NavBar>
 		<div class="buttons">
-			<Button class="shadow-sm shadow-black/30 hover:bg-emerald-800">Pricing</Button>
+			<Button
+				class="border-2 border-emerald-700 bg-white text-emerald-700 transition-transform ease-in-out hover:scale-102 hover:border-emerald-900 hover:bg-white hover:text-emerald-900"
+				>Pricing</Button
+			>
 			{#if !data.session?.user?.id}
-				<Button class="bg-neutral-200 text-gray-800 hover:bg-neutral-300">
+				<Button
+					class="bg-emerald-700  transition-transform ease-in-out hover:scale-102 hover:bg-emerald-900"
+				>
 					<a href="/auth"> Log In </a>
 				</Button>
 			{:else}
-				<Button class="bg-neutral-200 text-gray-800 hover:bg-neutral-200 hover:text-emerald-600">
+				<Button
+					class="bg-emerald-700  transition-transform ease-in-out hover:scale-102 hover:bg-emerald-900"
+				>
 					<a href="/app/user/{data.session.user?.id}">Dashboard</a>
 				</Button>
 			{/if}
 		</div>
-	</nav>
+	</NavBar>
+	<!-- <header
+		class="p flex w-full flex-row items-center justify-between border-b border-neutral-900/20 p-6 shadow-sm/5"
+	>
+		<h2 class="hover: w-fit text-3xl font-bold text-emerald-700">Investo</h2>
+		<div class="buttons">
+			<Button
+				class="border-2 border-emerald-700 bg-white text-emerald-700 transition-transform ease-in-out hover:scale-102 hover:border-emerald-900 hover:bg-white hover:text-emerald-900"
+				>Pricing</Button
+			>
+			{#if !data.session?.user?.id}
+				<Button
+					class="bg-emerald-700  transition-transform ease-in-out hover:scale-102 hover:bg-emerald-900"
+				>
+					<a href="/auth"> Log In </a>
+				</Button>
+			{:else}
+				<Button
+					class="bg-emerald-700  transition-transform ease-in-out hover:scale-102 hover:bg-emerald-900"
+				>
+					<a href="/app/user/{data.session.user?.id}">Dashboard</a>
+				</Button>
+			{/if}
+		</div>
+	</header> -->
 
 	<!-- Hero Section -->
-	<section class="container mx-auto snap-center snap-always px-6 py-20 pt-[30vh] text-center">
+	<section class="container mx-auto snap-center snap-always px-6 py-20 text-center">
 		<div class="mx-auto max-w-4xl">
-			<h1
-				class="mb-6 bg-gradient-to-r from-white to-purple-300 bg-clip-text text-6xl font-bold text-transparent"
-			>
-				Transform Your Workflow
-			</h1>
-			<p class="mb-8 text-xl leading-relaxed text-gray-300">
+			<h1 class="ssm:text-4xl text-base-900 mb-6 text-6xl font-bold">Transform Your Workflow</h1>
+			<p class="text-base-900 mb-8 text-xl leading-relaxed">
 				Streamline your processes, boost productivity, and achieve more with our powerful platform
 				designed for modern teams.
 			</p>
@@ -44,13 +69,13 @@
 			{#if isLoading}
 				<button
 					disabled
-					class="cursor-not-allowed rounded-lg bg-purple-600 px-8 py-4 text-lg font-semibold opacity-50"
+					class="cursor-not-allowed rounded-lg bg-emerald-600 px-8 py-4 text-lg font-semibold opacity-50"
 				>
 					Loading...
 				</button>
 			{:else}
 				<button
-					class="transform rounded-lg bg-gradient-to-r from-green-600 to-emerald-600 px-8 py-4 text-lg font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-700 hover:to-emerald-700 hover:shadow-xl"
+					class="transform rounded-lg bg-emerald-700 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-emerald-900 hover:shadow-xl"
 				>
 					{#if isLoggedIn}
 						<a href="/app">Go to Dashboard</a>
@@ -66,9 +91,9 @@
 	<section class="container mx-auto snap-y snap-mandatory px-6 py-20">
 		<div class="grid gap-8 md:grid-cols-3">
 			<div
-				class="rounded-xl bg-white/10 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-white/20"
+				class="rounded-xl border border-neutral-900/30 p-8 shadow-sm/8 transition-all duration-300 hover:scale-102"
 			>
-				<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-purple-500">
+				<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-700">
 					<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path
 							stroke-linecap="round"
@@ -78,17 +103,17 @@
 						></path>
 					</svg>
 				</div>
-				<h3 class="mb-3 text-xl font-semibold">Lightning Fast</h3>
-				<p class="text-gray-300">
+				<h3 class="text-base-900 mb-3 text-xl font-bold">Lightning Fast</h3>
+				<p class="text-base-900">
 					Experience blazing-fast performance with our optimized infrastructure and cutting-edge
 					technology.
 				</p>
 			</div>
 
 			<div
-				class="rounded-xl bg-white/10 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-white/20"
+				class="rounded-xl border border-neutral-900/30 p-8 shadow-sm/8 transition-all duration-300 hover:scale-102"
 			>
-				<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500">
+				<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-700">
 					<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path
 							stroke-linecap="round"
@@ -99,15 +124,13 @@
 					</svg>
 				</div>
 				<h3 class="mb-3 text-xl font-semibold">Secure & Reliable</h3>
-				<p class="text-gray-300">
-					Your data is protected with enterprise-grade security and 99.9% uptime guarantee.
-				</p>
+				<p>Your data is protected with enterprise-grade security and 99.9% uptime guarantee.</p>
 			</div>
 
 			<div
-				class="snap-center snap-always rounded-xl bg-white/10 p-8 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-white/20"
+				class="rounded-xl border border-neutral-900/30 p-8 shadow-sm/8 transition-all duration-300 hover:scale-102"
 			>
-				<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-green-500">
+				<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-700">
 					<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path
 							stroke-linecap="round"
@@ -118,9 +141,7 @@
 					</svg>
 				</div>
 				<h3 class="mb-3 text-xl font-semibold">User Friendly</h3>
-				<p class="text-gray-300">
-					Intuitive design and seamless user experience that gets you productive from day one.
-				</p>
+				<p>Intuitive design and seamless user experience that gets you productive from day one.</p>
 			</div>
 		</div>
 	</section>
@@ -129,20 +150,18 @@
 	<section class="container flex w-full px-6 py-20 text-center">
 		<div class="mx-auto max-w-2xl rounded-2xl bg-white/10 p-12 backdrop-blur-sm">
 			<h2 class="mb-4 text-3xl font-bold">Ready to Get Started?</h2>
-			<p class="mb-8 text-gray-300">
-				Join thousands of users who are already transforming their workflow.
-			</p>
+			<p class="mb-8">Join thousands of users who are already transforming their workflow.</p>
 
 			{#if isLoading}
 				<button
 					disabled
-					class="cursor-not-allowed rounded-lg bg-purple-600 px-8 py-4 text-lg font-semibold opacity-50"
+					class="cursor-not-allowed rounded-lg bg-emerald-600 px-8 py-4 text-lg font-semibold opacity-50"
 				>
 					Loading...
 				</button>
 			{:else}
 				<button
-					class="transform rounded-lg bg-gradient-to-r from-green-600 to-emerald-600 px-8 py-4 text-lg font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-700 hover:to-emerald-700 hover:shadow-xl"
+					class="transform rounded-lg bg-emerald-700 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:scale-102 hover:text-white"
 				>
 					<!-- {isLoggedIn ? 'Go to Dashboard' : 'Start Free Trial'} -->
 					{#if isLoggedIn}

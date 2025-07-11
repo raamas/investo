@@ -7,10 +7,12 @@
 	let { data } = $props();
 </script>
 
-<PageTitle className="md:mt-24">Feed</PageTitle>
-<div class="flex flex-col items-center justify-center p-4 md:flex-row md:flex-wrap md:gap-4">
+<div
+	class="flex flex-col items-center justify-center p-4 text-center md:flex-row md:flex-wrap md:gap-4"
+>
+	<PageTitle className="md:mt-24">Feed</PageTitle>
 	{#each data.posts as post}
-		<Card class="mb-4 max-h-[60vh] w-full max-w-md shadow-2xs md:min-h-[60vh] md:w-lg">
+		<Card class="mb-4 max-h-[60vh] w-full max-w-md text-start shadow-2xs md:min-h-[60vh] md:w-lg">
 			<CardHeader>
 				<img src={post.image} alt={post.title} class="mb-2 h-48 w-full rounded-lg object-cover" />
 				<CardTitle>
