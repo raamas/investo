@@ -7,17 +7,17 @@
 </script>
 
 <NavBar user={data?.session?.user}
-	><ul class="flex flex-row gap-10">
+	><ul class="flex flex-row items-center gap-10">
 		<li>
 			<a href="/app" class="flex transition-all ease-in hover:text-emerald-700">
 				<p class="text-grey-600 mr-2 flex hidden md:flex">Home</p>
-				<Icon class="md:hidden" icon="fluent:home-24-filled" style="font-size: 24px;" /></a
+				<Icon class="md:hidden" icon="lucide:home" style="font-size: 24px;" /></a
 			>
 		</li>
 		<li>
 			<a href="/app/feed" class="flex transition-all ease-in hover:text-emerald-700">
 				<p class="text-grey-600 mr-2 flex hidden md:flex">Feed</p>
-				<Icon class="md:hidden" icon="fluent:news-24-filled" style="font-size: 24px;" />
+				<Icon class="md:hidden" icon="lucide:newspaper" style="font-size: 24px;" />
 			</a>
 		</li>
 		<li>
@@ -25,14 +25,14 @@
 				<a
 					href="/app/user/{data?.session?.user?.id}"
 					class="flex transition-all ease-in hover:text-emerald-700"
+					aria-label="View profile"
 				>
-					<p class="text-grey-600 mr-2 flex hidden md:flex">My Dashboard</p>
-					<Icon class="md:hidden" icon="fluent:person-24-filled" style="font-size: 24px;" />
+					<img src={data.session.user.image} class="size-12 rounded-full" alt="" />
 				</a>
 			{:else}
 				<a href="/auth" class="flex transition-all ease-in hover:text-emerald-700">
-					<p class="text-grey-600 mr-2 flex hidden md:flex">Log In</p>
-					<Icon class="md:hidden" icon="fluent:person-24-filled" style="font-size: 24px;" />
+					<!-- <p class="text-grey-600 mr-2 flex hidden md:flex">Log In</p> -->
+					<Icon class="md:hidden" icon="lucide:person-24-regular" style="font-size: 24px;" />
 				</a>
 			{/if}
 		</li>

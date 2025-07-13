@@ -59,7 +59,7 @@
 
 	<!-- Hero Section -->
 	<section class="container mx-auto snap-center snap-always px-6 py-20 text-center">
-		<div class="mx-auto max-w-4xl pt-12 lg:pt-36">
+		<div class="mx-auto max-w-4xl pt-24 lg:pt-36">
 			<h1 class="ssm:text-4xl text-base-900 mb-6 text-6xl font-bold">Transform Your Workflow</h1>
 			<p class="text-base-900 mb-8 text-xl leading-relaxed">
 				Streamline your processes, boost productivity, and achieve more with our powerful platform

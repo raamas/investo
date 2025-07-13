@@ -1,4 +1,5 @@
 <script>
+	//@ts-nocheck
 	import PageTitle from '$lib/components/PageTitle.svelte';
 	import CardContent from '$lib/components/ui/card/card-content.svelte';
 	import CardHeader from '$lib/components/ui/card/card-header.svelte';
@@ -10,7 +11,7 @@
 <div
 	class="flex flex-col items-center justify-center p-4 text-center md:flex-row md:flex-wrap md:gap-4"
 >
-	<PageTitle className="md:mt-24">Feed</PageTitle>
+	<PageTitle className="mt-24">Feed</PageTitle>
 	{#each data.posts as post}
 		<Card class="mb-4 max-h-[60vh] w-full max-w-md text-start shadow-2xs md:min-h-[60vh] md:w-lg">
 			<CardHeader>

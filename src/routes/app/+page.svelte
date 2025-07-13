@@ -16,7 +16,7 @@
 <main
 	class="flex w-screen flex-col items-center text-center md:flex-row md:flex-wrap md:justify-center md:gap-3"
 >
-	<PageTitle className="md:mt-24 ">Popular</PageTitle>
+	<PageTitle className="mt-24 ">Popular</PageTitle>
 	<div class="flex w-[80vw] flex-col flex-wrap items-end justify-center md:flex-row md:gap-3">
 		{#each data.coins as coin}<Coin {coin} />{/each}
 	</div>

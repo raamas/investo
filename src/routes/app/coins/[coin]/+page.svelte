@@ -1,4 +1,5 @@
 <script>
+	//@ts-nocheck
 	import PageTitle from '$lib/components/PageTitle.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 
@@ -15,10 +16,13 @@
 	import { supabase } from '$lib/supabaseClient.js';
 	import { v4 } from 'uuid';
 	import { onMount } from 'svelte';
+	import Alert from '$lib/components/ui/alert/alert.svelte';
+	import AlertTitle from '$lib/components/ui/alert/alert-title.svelte';
+	import AlertDescription from '$lib/components/ui/alert/alert-description.svelte';
 
 	let { data } = $props();
 	let isTracked = $state(data.isTracked);
-
+	let showTrackingSuccess = $state(false);
 	if (!data.session?.user) {
 		isTracked = true;
 	}
@@ -59,6 +63,9 @@
 			return;
 		}
 
+		const date = new Date();
+		const dateString = date.toISOString();
+
 		let { data: userTracklist, error: userTracklistError } = await supabase
 			.from('tracklists')
 			.select()
@@ -81,7 +88,8 @@
 							coinId: data.id,
 							startPrice: data.market_data.current_price.usd,
 							name: data.name,
-							currentPrice: null
+							currentPrice: null,
+							dateStartTracking: dateString
 						}
 					]
 				})
@@ -105,7 +113,8 @@
 						coinId: data.id,
 						startPrice: data.market_data.current_price.usd,
 						name: data.name,
-						currentPrice: null
+						currentPrice: null,
+						dateStartTracking: dateString
 					}
 				]
 			})
@@ -117,6 +126,8 @@
 		} else {
 			console.log('Added to track list:', newTracklist);
 			checkTracked(data.id, data.session?.user?.id);
+			showTrackingSuccess = true;
+			setTimeout(() => (showTrackingSuccess = false), 3000);
 		}
 		if (!isTracked) {
 			isTracked = true;
@@ -124,18 +135,25 @@
 	};
 </script>
 
-<header class="flex w-screen flex-row items-center justify-between md:mx-auto md:mt-16 md:w-1/2">
-	<PageTitle>{data.name}</PageTitle>
+<div class="flex w-full flex-row items-center justify-between pt-16 md:mx-auto md:mt-16 md:w-1/2">
+	<PageTitle className="">{data.name}</PageTitle>
 	<div class="m-8 text-lg font-light text-gray-700">
 		${data.market_data.current_price.usd.toLocaleString()} USD
 	</div>
-</header>
+</div>
 <div class="flex flex-col justify-center p-4 text-center md:mx-auto md:w-1/3 md:justify-center">
 	<Button
 		disabled={isTracked}
-		class="text-primary-foreground text-md rounded-2xl bg-emerald-400 p-6 shadow-xs hover:bg-emerald-600/90 disabled:bg-gray-300 disabled:text-gray-500"
+		class="text-primary-foreground text-md rounded-2xl bg-emerald-700 p-6 shadow-xs hover:bg-emerald-900/90 disabled:bg-gray-300 disabled:text-gray-500"
 		onclick={addToTrackList}>Track</Button
 	>
+	<Alert class="{!showTrackingSuccess && 'hidden'} fixed bottom-8 z-30 w-md text-start">
+		<AlertTitle class="text-base font-bold text-emerald-700">Success:</AlertTitle>
+		<AlertDescription>
+			This coin is being tracked with a starting price of ${data.market_data.current_price.usd.toLocaleString()}
+			USD
+		</AlertDescription>
+	</Alert>
 
 	<Card class="mt-8 w-full shadow-2xs	">
 		<CardHeader>

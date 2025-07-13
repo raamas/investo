@@ -1,4 +1,6 @@
 <script>
+	//@ts-nocheck
+
 	import PageTitle from '$lib/components/PageTitle.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import Icon from '@iconify/svelte';
@@ -24,7 +26,7 @@
 </script>
 
 <div class="flex flex-col items-center justify-center p-8 pb-2 text-center">
-	<PageTitle className="md:mt-16">{post.title}</PageTitle>
+	<PageTitle className="mt-24">{post.title}</PageTitle>
 	<div class="mb-4 w-full max-w-2xl">
 		<img src={post.image} alt={post.title} class="mb-2 h-64 w-full rounded-lg object-cover" />
 	</div>
@@ -41,7 +43,7 @@
 				class="text-md bg-transparent text-gray-600 shadow-none hover:bg-transparent hover:text-red-600 disabled:font-bold disabled:text-gray-800 {likedClass}"
 				onclick={() => sendLike()}
 			>
-				<Icon icon="fluent:heart-24-{heartState}" />
+				<Icon icon="lucide:heart-24-{heartState}" />
 			</Button>
 		</p>
 	</div>

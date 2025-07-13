@@ -6,6 +6,7 @@ export const load = async ({ fetch, params }) => {
 		}
 	});
 	let data = await response.json();
+	console.log(response);
 	let currentDate = Math.floor(Date.now() / 1000);
 	let lastYear = Math.floor(currentDate - 365 * 24 * 60 * 60);
 
